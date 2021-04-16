@@ -1,13 +1,21 @@
 #!/usr/bin/env bash
 
+# Variables
+INSTALL_LOC="/usr/local/bin"
+
+# Prereqs
+sudo apt -y install gcc unzip
+
 # Install brew
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 echo 'eval "$(/home/ubuntu/.linuxbrew/bin/brew shellenv)"' >> /home/ubuntu/.profile
 eval "$(/home/ubuntu/.linuxbrew/bin/brew shellenv)"
 sudo apt update && sudo apt -y upgrade
 sudo apt -y install gcc
+
 # Install github
 brew install gh
+gh auth login
 mkdir $HOME/github/
 
 # Install docker
@@ -26,3 +34,10 @@ sudo curl \
     -o /etc/bash_completion.d/docker-compose
 . $HOME/.bashrc
 sudo apt update
+
+# Download NGC CLI
+wget -O ngccli_cat_linux.zip https://ngc.nvidia.com/downloads/ngccli_cat_linux.zip
+sudo unzip -o ngccli_cat_linux.zip $INSTALL_LOC && chmod u+x ngc
+md5sum -c $INSTALL_LOC/ngc.md5
+ngc config set
+rm `which ngc`
