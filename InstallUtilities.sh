@@ -37,7 +37,5 @@ sudo apt update
 
 # Download NGC CLI
 wget -O ngccli_cat_linux.zip https://ngc.nvidia.com/downloads/ngccli_cat_linux.zip
-sudo unzip -o ngccli_cat_linux.zip $INSTALL_LOC && chmod u+x ngc
-md5sum -c $INSTALL_LOC/ngc.md5
+sudo unzip -d $INSTALL_LOC ngccli_cat_linux.zip && sudo chmod u+x $INSTALL_LOC/ngc
 ngc config set
-rm `which ngc`
