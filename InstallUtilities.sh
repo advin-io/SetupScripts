@@ -5,6 +5,7 @@ INSTALL_LOC="/usr/local/bin"
 
 # Prereqs
 sudo apt -y install gcc unzip
+mkdir $HOME/Datasets $HOME/Models
 
 # Install brew
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
@@ -19,7 +20,7 @@ gh auth login
 mkdir $HOME/github/
 
 # Install docker
-curl -fsSL https://get.docker.com -o get-docker.sh
+# curl -fsSL https://get.docker.com -o get-docker.sh
 sudo sh get-docker.sh
 rm get-docker.sh
 
@@ -37,5 +38,6 @@ sudo apt update
 
 # Download NGC CLI
 wget -O ngccli_cat_linux.zip https://ngc.nvidia.com/downloads/ngccli_cat_linux.zip
-sudo unzip -d $INSTALL_LOC ngccli_cat_linux.zip && sudo chmod u+x $INSTALL_LOC/ngc
+sudo unzip -d /usr/local/bin ngccli_cat_linux.zip && sudo chmod u+x /usr/local/bin/ngc
+rm ngccli_cat_linux.zip
 ngc config set
